@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NekoStream - Anime Streaming</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#090a10;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:20px 5%;display:flex;
+ justify-content:space-between;align-items:center;
+ background:#10111c;border-bottom:1px solid #292a3a;
+ position:sticky;top:0;z-index:5;
+}
+.logo{font-size:25px;font-weight:bold;color:#bd83f5}
+nav a{color:white;text-decoration:none;margin-left:15px}
+.hero{
+ padding:65px 7%;min-height:300px;
+ background:linear-gradient(90deg,#171027,#251444,#10111c);
+}
+.hero h1{font-size:38px;margin:0 0 15px}
+.hero p{color:#c6bed4;max-width:450px;line-height:1.6}
+.btn{
+ background:#a35be0;color:white;border:0;
+ padding:13px 22px;border-radius:8px;
+ font-weight:bold;cursor:pointer;
+}
+main{padding:25px 5%}
+.search{
+ width:100%;padding:15px;border-radius:9px;
+ border:1px solid #393448;background:#171824;
+ color:white;font-size:16px;margin-bottom:25px;
+}
+h2{font-size:22px}
+.catalogue{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:16px;
+}
+.anime{
+ background:#171824;border-radius:12px;
+ overflow:hidden;border:1px solid #292a3a;
+}
+.poster{
+ height:155px;display:flex;align-items:center;
+ justify-content:center;font-size:48px;
+ background:linear-gradient(135deg,#38205c,#171824);
+}
+.anime h3{font-size:15px;margin:12px}
+.anime p{font-size:12px;color:#aaa;margin:0 12px 14px}
+.anime button{
+ margin:0 12px 14px;padding:9px 12px;
+ background:#914bc9;color:white;border:0;
+ border-radius:6px;cursor:pointer;
+}
+footer{
+ padding:30px;text-align:center;color:#999;
+ border-top:1px solid #292a3a;margin-top:40px;
+}
+#details{
+ display:none;background:#171824;padding:20px;
+ border-radius:12px;margin-top:20px;
+ border:1px solid #a35be0;
+}
+@media(min-width:700px){
+ .catalogue{grid-template-columns:repeat(4,1fr)}
+ .poster{height:220px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">🐱 NekoStream</div>
+ <nav>
+  <a href="#accueil">Accueil</a>
+  <a href="#catalogue">Catalogue</a>
+ </nav>
+</header>
+
+<section class="hero" id="accueil">
+ <h1>Bienvenue sur NekoStream</h1>
+ <p>Ton nouvel univers anime commence ici.
+ Découvre des créations originales et explore
+ notre catalogue.</p>
+ <a href="#catalogue">
+  <button class="btn">Explorer le catalogue</button>
+ </a>
+</section>
+
+<main>
+ <h2>Rechercher un anime</h2>
+ <input class="search" id="search"
+ placeholder="Tape le nom d'un anime..."
+ oninput="filterAnime()">
+
+ <h2 id="catalogue">Notre catalogue</h2>
+
+ <div class="catalogue" id="animeList">
+
+  <article class="anime" data-name="shadow legends">
+   <div class="poster">⚔️</div>
+   <h3>Shadow Legends</h3>
+   <p>Action • Aventure • Original</p>
+   <button onclick="showDetails('Shadow Legends')">Découvrir</button>
+  </article>
+
+  <article class="anime" data-name="neon city">
+   <div class="poster">🌆</div>
+   <h3>Neon City</h3>
+   <p>Science-fiction • Action</p>
+   <button onclick="showDetails('Neon City')">Découvrir</button>
+  </article>
+
+  <article class="anime" data-name="dragon spirit">
+   <div class="poster">🐉</div>
+   <h3>Dragon Spirit</h3>
+   <p>Fantastique • Aventure</p>
+   <button onclick="showDetails('Dragon Spirit')">Découvrir</button>
+  </article>
+
+  <article class="anime" data-name="moon academy">
+   <div class="poster">🌙</div>
+   <h3>Moon Academy</h3>
+   <p>Fantastique • École</p>
+   <button onclick="showDetails('Moon Academy')">Découvrir</button>
+  </article>
+
+ </div>
+
+ <section id="details">
+  <h2 id="detailTitle"></h2>
+  <p>Fiche de présentation de cette œuvre.</p>
+  <p>Les épisodes autorisés seront disponibles ici prochainement.</p>
+  <button class="btn" onclick="closeDetails()">Fermer</button>
+ </section>
+</main>
+
+<footer>
+ <div class="logo">🐱 NekoStream</div>
+ <p>© 2026 NekoStream - Tous droits réservés.</p>
+ <p>Plateforme en développement.</p>
+</footer>
+
+<script>
+function filterAnime(){
+ const query=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.anime').forEach(card=>{
+  card.style.display=card.dataset.name.includes(query)
+   ?'block':'none';
+ });
+}
+function showDetails(name){
+ document.getElementById('detailTitle').textContent=name;
+ document.getElementById('details').style.display='block';
+ document.getElementById('details').scrollIntoView({behavior:'smooth'});
+}
+function closeDetails(){
+ document.getElementById('details').style.display='none';
+}
+</script>
+
+</body>
+</html>
